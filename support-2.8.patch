@@ -1,0 +1,38 @@
+diff --git a/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial.addin.xml b/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial.addin.xml
+index 8b09ce8..2d7fa76 100644
+--- a/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial.addin.xml
++++ b/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial.addin.xml
+@@ -6,16 +6,16 @@
+        url         = "http://www.monodevelop.com/"
+        description = "Mercurial support for the Version Control Add-in"
+        category    = "Version Control"
+-       version     = "3.1.0">
++       version     = "2.8.0">
+  
+ 	<Runtime>
+ 		<Import assembly="Mercurial.Net.dll" />
+ 	</Runtime>
+ 
+ 	<Dependencies>
+-	    <Addin id="Core" version="3.1.0"/>
+-	    <Addin id="Ide" version="3.1.0"/>
+-	    <Addin id="VersionControl" version="3.1.0"/>
++	    <Addin id="Core" version="2.8.0"/>
++	    <Addin id="Ide" version="2.8.0"/>
++	    <Addin id="VersionControl" version="2.8.0"/>
+ 	</Dependencies>
+ 	
+ 	<Extension path="/MonoDevelop/VersionControl/VersionControlSystems">
+diff --git a/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial/MercurialRepository.cs b/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial/MercurialRepository.cs
+index ab7d4cb..38b58f8 100644
+--- a/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial/MercurialRepository.cs
++++ b/MonoDevelop.VersionControl.Mercurial/MonoDevelop.VersionControl.Mercurial/MercurialRepository.cs
+@@ -792,7 +792,7 @@ namespace MonoDevelop.VersionControl.Mercurial
+ 			return ret;
+ 		}
+ 		
+-		public override DiffInfo GenerateDiff (FilePath baseLocalPath, VersionInfo vi)
++		public DiffInfo GenerateDiff (FilePath baseLocalPath, VersionInfo vi)
+ 		{
+ 			var rev = new RevSpec (((MercurialRevision) vi.Revision).ShortName);
+ 			string diff = repo.Diff (new global::Mercurial.DiffCommand ().WithIncludePattern (vi.LocalPath).WithRevisions (rev));
