@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Dictionary>
+    <Words>
+        <Recognized>
+            <Word>Datamine</Word>
+            <Word>Changeset</Word>
+            <Word>Changesets</Word>
+            <Word>Changegroup</Word>
+            <Word>Recurse</Word>
+            <Word>Async</Word>
+            <Word>Hg</Word>
+            <Word>Config</Word>
+            <Word>Enum</Word>
+            <Word>Nullable</Word>
+            <Word>Git</Word>
+            <Word>Backout</Word>
+            <Word>Py</Word>
+            <Word>Ssh</Word>
+            <Word>Grep</Word>
+        </Recognized>
+    </Words>
+    <Acronyms>
+        <CasingExceptions>
+            <Acronym>GTK</Acronym>
+            <Acronym>QT</Acronym>
+        </CasingExceptions>
+    </Acronyms>
+</Dictionary>

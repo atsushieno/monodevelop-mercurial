@@ -1,0 +1,112 @@
+<Addin id          = "VersionControl.Mercurial"
+       namespace   = "MonoDevelop"
+       name        = "Mercurial support"
+       author      = "Atsushi Eno"
+       copyright   = "LGPL"
+       url         = "http://www.monodevelop.com/"
+       description = "Mercurial support for the Version Control Add-in"
+       category    = "Version Control"
+       version     = "3.1.0">
+ 
+	<Runtime>
+		<Import assembly="Mercurial.Net.dll" />
+	</Runtime>
+
+	<Dependencies>
+	    <Addin id="Core" version="3.1.0"/>
+	    <Addin id="Ide" version="3.1.0"/>
+	    <Addin id="VersionControl" version="3.1.0"/>
+	</Dependencies>
+	
+	<Extension path="/MonoDevelop/VersionControl/VersionControlSystems">
+		<Class class="MonoDevelop.VersionControl.Mercurial.MercurialClient"/>
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/Commands/VersionControl">
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.Push" 
+			_label = "Push Changes..."
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.PushCommandHandler"
+			description = "Push changes to a remote repository."/>
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.SwitchToBranch" 
+			_label = "Switch to Branch"
+			type="radio|array"
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.SwitchToBranchHandler"
+			description = "Switch to branch."/>
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.ManageBranches" 
+			_label = "Manage Branches and Remotes"
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.ManageBranchesHandler" />
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.Merge" 
+			_label = "Merge Branch..."
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.MergeBranchHandler" />
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.Rebase" 
+			_label = "Rebase to Branch..."
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.RebaseBranchHandler" />
+		<!--
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.Stash" 
+			_label = "Shelf..."
+			description = "Stash the changes in a dirty working directory away."
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.StashHandler" />
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.StashPop" 
+			_label = "Pop shelf"
+			description = "Remove a single stashed state from the stash list and apply it on top of the current working tree state."
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.StashPopHandler" />
+		<Command id = "MonoDevelop.VersionControl.Mercurial.Commands.ManageStashes" 
+			_label = "Manage stashes"
+			defaultHandler = "MonoDevelop.VersionControl.Mercurial.ManageStashesHandler" />
+		-->
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/MainMenu/VersionControl">
+		<SeparatorItem insertafter="MonoDevelop.VersionControl.Commands.CommitSolution"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Push" />
+		<ItemSet id = "SwitchToBranch" _label = "Switch to Branch" autohide="true">
+			<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.SwitchToBranch"/>
+		</ItemSet>
+		<SeparatorItem />
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Merge"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Rebase"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.ManageBranches"/>
+		<!--
+		<SeparatorItem />
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Stash"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.StashPop"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.ManageStashes"/>
+		-->
+		<SeparatorItem />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad">
+		<ItemSet id = "SwitchToBranch" _label = "Switch to Branch" autohide="true" insertafter = "VersionControl">
+			<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.SwitchToBranch"/>
+		</ItemSet>
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/ContextMenu/ProjectPad/VersionControl">
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Push" insertbefore="MonoDevelop.VersionControl.Commands.Publish"/>
+		<CommandItem id = "MonoDevelop.VersionControl.Mercurial.Commands.Merge"/>
+		<SeparatorItem />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/Pads/ProjectPad">
+		<NodeBuilder id = "VersionControlNodeExtension" class = "MonoDevelop.VersionControl.Mercurial.MercurialNodeBuilderExtension"/>
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/VersionControl/CommitDialogExtensions">
+		<Class class="MonoDevelop.VersionControl.Mercurial.MercurialCommitDialogExtension" />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Ide/GlobalOptionsDialog/VersionControl">
+		<Section id = "Mercurial" _label = "Mercurial" class = "MonoDevelop.VersionControl.Mercurial.MercurialOptionsPanel" />
+	</Extension>
+	
+	<Extension path = "/MonoDevelop/Core/StockIcons">
+		<StockIcon stockid = "vc-mercurial-tag" resource = "tag_blue.png"/>
+		<StockIcon stockid = "vc-mercurial-source" resource = "server.png"/>
+		<StockIcon stockid = "vc-mercurial-branch" resource = "arrow_branch.png"/>
+	</Extension>
+	
+<!--	<Extension path = "/MonoDevelop/Ide/ProjectFeatures">
+		<Class class = "MonoDevelop.VersionControl.Mercurial.MercurialSupportFeature" />
+	</Extension>
+-->
+</Addin>

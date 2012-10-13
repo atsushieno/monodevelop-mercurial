@@ -1,0 +1,10 @@
+glob:*.user
+glob:*.suo
+glob:bin\
+glob:obj\
+glob:_ReSharper.*\
+glob:Help/
+glob:*.[Cc]ache
+syntax: glob
+*.crunchsolution.local.xml
+*.crunchproject.local.xml

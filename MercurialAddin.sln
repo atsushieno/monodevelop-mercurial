@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mercurial.Net", "Mercurial.Net\Mercurial.Net\Mercurial.Net.csproj", "{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.VersionControl.Mercurial.Addin", "MonoDevelop.VersionControl.Mercurial\MonoDevelop.VersionControl.Mercurial.Addin.csproj", "{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseBinaries|Any CPU = ReleaseBinaries|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.ReleaseBinaries|Any CPU.ActiveCfg = ReleaseBinaries|Any CPU
+		{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}.ReleaseBinaries|Any CPU.Build.0 = ReleaseBinaries|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.ReleaseBinaries|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}.ReleaseBinaries|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Mercurial.Net\Mercurial.Net.csproj
+	EndGlobalSection
+EndGlobal

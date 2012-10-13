@@ -1,0 +1,218 @@
+<Configuration>
+  <CodeStyleSettings>
+    <ExternalPath IsNull="False" />
+    <Sharing>SOLUTION</Sharing>
+    <CSS>
+      <FormatSettings />
+      <Naming2 />
+    </CSS>
+    <CSharp>
+      <FormatSettings>
+        <ALIGN_MULTILINE_ARGUMENT>False</ALIGN_MULTILINE_ARGUMENT>
+        <ALIGN_MULTILINE_ARRAY_AND_OBJECT_INITIALIZER>False</ALIGN_MULTILINE_ARRAY_AND_OBJECT_INITIALIZER>
+        <ALIGN_MULTILINE_PARAMETER>False</ALIGN_MULTILINE_PARAMETER>
+        <ANONYMOUS_METHOD_DECLARATION_BRACES>NEXT_LINE</ANONYMOUS_METHOD_DECLARATION_BRACES>
+        <INDENT_ANONYMOUS_METHOD_BLOCK>False</INDENT_ANONYMOUS_METHOD_BLOCK>
+        <INDENT_EMBRACED_INITIALIZER_BLOCK>False</INDENT_EMBRACED_INITIALIZER_BLOCK>
+        <INITIALIZER_BRACES>NEXT_LINE</INITIALIZER_BRACES>
+        <KEEP_BLANK_LINES_IN_CODE>1</KEEP_BLANK_LINES_IN_CODE>
+        <KEEP_BLANK_LINES_IN_DECLARATIONS>1</KEEP_BLANK_LINES_IN_DECLARATIONS>
+        <MODIFIERS_ORDER IsNull="False">
+          <Item>public</Item>
+          <Item>protected</Item>
+          <Item>internal</Item>
+          <Item>private</Item>
+          <Item>new</Item>
+          <Item>abstract</Item>
+          <Item>virtual</Item>
+          <Item>override</Item>
+          <Item>sealed</Item>
+          <Item>static</Item>
+          <Item>readonly</Item>
+          <Item>extern</Item>
+          <Item>unsafe</Item>
+          <Item>volatile</Item>
+        </MODIFIERS_ORDER>
+        <PLACE_ABSTRACT_ACCESSORHOLDER_ON_SINGLE_LINE>False</PLACE_ABSTRACT_ACCESSORHOLDER_ON_SINGLE_LINE>
+        <PLACE_CONSTRUCTOR_INITIALIZER_ON_SAME_LINE>False</PLACE_CONSTRUCTOR_INITIALIZER_ON_SAME_LINE>
+        <PLACE_FIELD_ATTRIBUTE_ON_SAME_LINE>False</PLACE_FIELD_ATTRIBUTE_ON_SAME_LINE>
+        <PLACE_SIMPLE_ACCESSOR_ON_SINGLE_LINE>False</PLACE_SIMPLE_ACCESSOR_ON_SINGLE_LINE>
+        <PLACE_SIMPLE_ANONYMOUSMETHOD_ON_SINGLE_LINE>False</PLACE_SIMPLE_ANONYMOUSMETHOD_ON_SINGLE_LINE>
+        <PLACE_SIMPLE_LINQ_ON_SINGLE_LINE>False</PLACE_SIMPLE_LINQ_ON_SINGLE_LINE>
+        <PLACE_TYPE_CONSTRAINTS_ON_SAME_LINE>False</PLACE_TYPE_CONSTRAINTS_ON_SAME_LINE>
+        <SIMPLE_EMBEDDED_STATEMENT_STYLE>LINE_BREAK</SIMPLE_EMBEDDED_STATEMENT_STYLE>
+        <SPACE_AFTER_TYPECAST_PARENTHESES>False</SPACE_AFTER_TYPECAST_PARENTHESES>
+        <SPACE_AROUND_MULTIPLICATIVE_OP>True</SPACE_AROUND_MULTIPLICATIVE_OP>
+        <SPACE_BEFORE_SIZEOF_PARENTHESES>False</SPACE_BEFORE_SIZEOF_PARENTHESES>
+        <SPACE_BEFORE_TYPEOF_PARENTHESES>False</SPACE_BEFORE_TYPEOF_PARENTHESES>
+        <SPACE_WITHIN_SINGLE_LINE_ARRAY_INITIALIZER_BRACES>True</SPACE_WITHIN_SINGLE_LINE_ARRAY_INITIALIZER_BRACES>
+        <STICK_COMMENT>False</STICK_COMMENT>
+        <WRAP_AFTER_DECLARATION_LPAR>True</WRAP_AFTER_DECLARATION_LPAR>
+        <WRAP_AFTER_INVOCATION_LPAR>True</WRAP_AFTER_INVOCATION_LPAR>
+        <WRAP_LIMIT>160</WRAP_LIMIT>
+        <WRAP_LINES>False</WRAP_LINES>
+      </FormatSettings>
+      <UsingsSettings />
+      <Naming2>
+        <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>
+        <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="TypesAndNamespaces" />
+        <PredefinedRule Inspect="True" Prefix="I" Suffix="" Style="AaBb" ElementKind="Interfaces" />
+        <PredefinedRule Inspect="True" Prefix="T" Suffix="" Style="AaBb" ElementKind="TypeParameters" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="MethodPropertyEvent" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Locals" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="LocalConstants" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Parameters" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PublicFields" />
+        <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="aaBb" ElementKind="PrivateInstanceFields" />
+        <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="aaBb" ElementKind="PrivateStaticFields" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Constants" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PrivateConstants" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="StaticReadonly" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PrivateStaticReadonly" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
+        <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
+      </Naming2>
+      <CustomMemberReorderingPatterns><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+
+<Patterns xmlns="urn:shemas-jetbrains-com:member-reordering-patterns">
+  
+</Patterns>
+]]></CustomMemberReorderingPatterns>
+    </CSharp>
+    <HTML>
+      <FormatSettings />
+    </HTML>
+    <JavaScript>
+      <FormatSettings />
+      <Naming2 />
+    </JavaScript>
+    <VB>
+      <FormatSettings />
+      <ImportsSettings />
+      <Naming2>
+        <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>
+        <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+      </Naming2>
+    </VB>
+    <Web>
+      <Naming2>
+        <UserRule Name="ASP_TAG_NAME" Inspect="True" Prefix="" Suffix="" Style="AaBb" />
+        <UserRule Name="ASP_TAG_PREFIX" Inspect="True" Prefix="" Suffix="" Style="AaBb" />
+        <UserRule Name="ASP_FIELD" Inspect="True" Prefix="" Suffix="" Style="AaBb" />
+        <UserRule Name="ASP_HTML_CONTROL" Inspect="True" Prefix="" Suffix="" Style="AaBb" />
+      </Naming2>
+    </Web>
+    <XML>
+      <FormatSettings />
+    </XML>
+    <Xaml>
+      <Naming2 />
+    </Xaml>
+    <GenerateMemberBody />
+    <Naming2>
+      <EventHandlerPatternLong>$object$_$event$</EventHandlerPatternLong>
+      <EventHandlerPatternShort>$event$Handler</EventHandlerPatternShort>
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Parameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="TypesAndNamespaces" />
+      <PredefinedRule Inspect="True" Prefix="I" Suffix="" Style="AaBb" ElementKind="Interfaces" />
+      <PredefinedRule Inspect="True" Prefix="T" Suffix="" Style="AaBb" ElementKind="TypeParameters" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="MethodPropertyEvent" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="Locals" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="aaBb" ElementKind="LocalConstants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PublicFields" />
+      <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="AaBb" ElementKind="PrivateInstanceFields" />
+      <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="AaBb" ElementKind="PrivateStaticFields" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Constants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="PrivateConstants" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="StaticReadonly" />
+      <PredefinedRule Inspect="True" Prefix="_" Suffix="" Style="AaBb" ElementKind="PrivateStaticReadonly" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
+      <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
+      <Abbreviation Text="URL" />
+      <Abbreviation Text="XHTML" />
+      <Abbreviation Text="BOM" />
+      <Abbreviation Text="GTK" />
+      <Abbreviation Text="QT" />
+    </Naming2>
+  </CodeStyleSettings>
+  <SharedSolutionTemplateManager>
+    <LiveTemplates>
+      <Template uid="b19d89c6-b31f-41ba-a121-b45e7f977942" shortcut="nex" description="Throw an ArgumentNullException if the given argument is null." text="if ($param$ == null)&#xD;&#xA;    throw new System.ArgumentNullException(&quot;$param$&quot;);" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="Statement" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="param" expression="parameterOfType(&quot;System.Object&quot;)" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+      <Template uid="3eaf4fe4-9efd-4ae6-a05a-090b00ecd30c" shortcut="nsex" description="Throw an ArgumentNullException if the given parameter is null, string.Empty, or only contains whitespace." text="if (StringEx.IsNullOrWhiteSpace($param$))&#xD;&#xA;    throw new System.ArgumentNullException(&quot;$param$&quot;);" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="Everywhere" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="param" expression="parameterOfType(&quot;System.String&quot;)" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+      <Template uid="37bbca16-8f80-4fb4-88ad-5dcda39472bd" shortcut="wp" description="WithProp method" text="/// &lt;summary&gt;&#xD;&#xA;/// Sets the &lt;see cref=&quot;$prop$&quot;/&gt; property to the specified value and&#xD;&#xA;/// returns this &lt;see cref=&quot;$class$&quot;/&gt; instance.&#xD;&#xA;/// &lt;/summary&gt;&#xD;&#xA;/// &lt;param name=&quot;value&quot;&gt;&#xD;&#xA;/// The new value for the &lt;see cref=&quot;$prop$&quot;/&gt; property.&#xD;&#xA;/// &lt;/param&gt;&#xD;&#xA;/// &lt;returns&gt;&#xD;&#xA;/// This &lt;see cref=&quot;$class$&quot;/&gt; instance.&#xD;&#xA;/// &lt;/returns&gt;&#xD;&#xA;/// &lt;remarks&gt;&#xD;&#xA;/// This method is part of the fluent interface.&#xD;&#xA;/// &lt;/remarks&gt;&#xD;&#xA;public $class$ With$prop$($proptype$ value$END$)&#xD;&#xA;{&#xD;&#xA;    $prop$ = value;&#xD;&#xA;    return this;&#xD;&#xA;}&#xD;&#xA;" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="TypeMember" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="prop" expression="LiveMacros.SuggestProperty()" initialRange="3" />
+          <Variable name="proptype" expression="completeSmart()" initialRange="0" />
+          <Variable name="class" expression="typeName()" initialRange="-1" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+      <Template uid="75ea3e57-240f-4e9e-ac07-8fb4debd8922" shortcut="la" description="Lambda" text="$var$ =&gt; $END$" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="Expression" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="var" expression="suggestIndexVariable()" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+    </LiveTemplates>
+  </SharedSolutionTemplateManager>
+  <CustomStructuralPatterns>
+    <Pattern Severity="ERROR" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Not using StringEx.IsNullOrWhiteSpace</Comment>
+      <ReplaceComment>Replace with call to StringEx.IsNullOrWhiteSpace</ReplaceComment>
+      <ReplacePattern>StringEx.IsNullOrWhiteSpace($param$)</ReplacePattern>
+      <SearchPattern>$param$ == null || $param$.Trim().Length == 0</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="param" ExpressionType="System.String" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="ERROR" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Missing CultureInfo.InvariantCulture</Comment>
+      <ReplaceComment>Add CultureInfo.InvariantCulture</ReplaceComment>
+      <ReplacePattern>string.Format(System.Globalization.CultureInfo.InvariantCulture, $format$, $args$)</ReplacePattern>
+      <SearchPattern>string.Format($format$, $args$)</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="format" ExpressionType="System.String" ExactType="True" />
+        <ArgumentPlaceholder Name="args" Minimal="-1" Maximal="-1" />
+      </Placeholders>
+    </Pattern>
+    <Pattern Severity="ERROR" FormatAfterReplace="True" ShortenReferences="True" Language="CSHARP">
+      <Comment>Missing CultureInfo parameter</Comment>
+      <ReplaceComment>Add CultureInfo.InvariantCulture parameter</ReplaceComment>
+      <ReplacePattern>int.Parse($expr$, System.Globalization.CultureInfo.InvariantCulture)</ReplacePattern>
+      <SearchPattern>int.Parse($expr$)</SearchPattern>
+      <Params />
+      <Placeholders>
+        <ExpressionPlaceholder Name="expr" ExpressionType="string" ExactType="True" />
+      </Placeholders>
+    </Pattern>
+  </CustomStructuralPatterns>
+</Configuration>

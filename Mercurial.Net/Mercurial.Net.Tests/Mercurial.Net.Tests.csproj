@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7DA876D9-5C17-4147-ABD7-6796A714F20E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mercurial.Tests</RootNamespace>
+    <AssemblyName>Mercurial.Net.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Lasse V. Karlsen.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseBinaries|AnyCPU'">
+    <OutputPath>bin\ReleaseBinaries\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Mercurial.Net.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;c:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework, Version=1.0.4109.34242, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdditionalArgumentsTests.cs" />
+    <Compile Include="AddRemoveTests.cs" />
+    <Compile Include="AddTests.cs" />
+    <Compile Include="AllFilesInProjectsAreUtf8Formatted.cs" />
+    <Compile Include="AnnotateTests.cs" />
+    <Compile Include="BookmarkTests.cs" />
+    <Compile Include="BranchesTests.cs" />
+    <Compile Include="BranchTests.cs" />
+    <Compile Include="BundleTests.cs" />
+    <Compile Include="CatTests.cs" />
+    <Compile Include="CollectionPropertiesTests.cs" />
+    <Compile Include="CommandBaseTests.cs" />
+    <Compile Include="CommandPropertiesDefaultValueTests.cs" />
+    <Compile Include="CommandServerTests.cs" />
+    <Compile Include="CommandTests.cs" />
+    <Compile Include="ConfigurationTests.cs" />
+    <Compile Include="CopyTests.cs" />
+    <Compile Include="DummyCommand.cs" />
+    <Compile Include="FluentInterfaceTests.cs" />
+    <Compile Include="ForgetTests.cs" />
+    <Compile Include="DualRepositoryTestsBase.cs" />
+    <Compile Include="GuiRepositoryExtensionMethodsTest.cs" />
+    <Compile Include="HeadsTests.cs" />
+    <Compile Include="Hooks\ChangegroupHookTests.cs" />
+    <Compile Include="Hooks\CommitHookTests.cs" />
+    <Compile Include="Hooks\MercurialCommandHookArgumentsTests.cs" />
+    <Compile Include="Hooks\MercurialCommandHookDictionaryTests.cs" />
+    <Compile Include="Hooks\PreCommitCommandHookTests.cs" />
+    <Compile Include="Hooks\HookTestUtilities.cs" />
+    <Compile Include="Hooks\IncomingHookTests.cs" />
+    <Compile Include="Hooks\PreCommitHookTests.cs" />
+    <Compile Include="Hooks\PreHookBaseClassTests.cs" />
+    <Compile Include="IdentifyTests.cs" />
+    <Compile Include="IncomingTests.cs" />
+    <Compile Include="ManifestTests.cs" />
+    <Compile Include="MercurialVersionAttributeTests.cs" />
+    <Compile Include="MercurialVersionBaseTests.cs" />
+    <Compile Include="MergeJobTests.cs" />
+    <Compile Include="MergeResolveTests.cs" />
+    <Compile Include="MergeTests.cs" />
+    <Compile Include="MoveTests.cs" />
+    <Compile Include="OutgoingTests.cs" />
+    <Compile Include="ParentsTests.cs" />
+    <Compile Include="PathsTests.cs" />
+    <Compile Include="PhaseTests.cs" />
+    <Compile Include="PullTests.cs" />
+    <Compile Include="PushTests.cs" />
+    <Compile Include="QueueExtensionTests.cs" />
+    <Compile Include="RemoveTests.cs" />
+    <Compile Include="RenameTests.cs" />
+    <Compile Include="ResolveTests.cs" />
+    <Compile Include="RevertTests.cs" />
+    <Compile Include="RollbackTests.cs" />
+    <Compile Include="SingleRepositoryTestsBase.cs" />
+    <Compile Include="ChangesetPathActionTests.cs" />
+    <Compile Include="ChangesetTests.cs" />
+    <Compile Include="ClientTests.cs" />
+    <Compile Include="CloneTests.cs" />
+    <Compile Include="CommitTests.cs" />
+    <Compile Include="InitTests.cs" />
+    <Compile Include="LogTests.cs" />
+    <Compile Include="ObserverTests.cs" />
+    <Compile Include="CommandClassesTests.cs" />
+    <Compile Include="RepositoryTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryTestsBase.cs" />
+    <Compile Include="RevisionsTests.cs" />
+    <Compile Include="StatusTests.cs" />
+    <Compile Include="StringExTests.cs" />
+    <Compile Include="SummaryTests.cs" />
+    <Compile Include="TagsTests.cs" />
+    <Compile Include="TagTests.cs" />
+    <Compile Include="TestTests.cs" />
+    <Compile Include="TipTests.cs" />
+    <Compile Include="UnbundleTests.cs" />
+    <Compile Include="UnicodeTests.cs" />
+    <Compile Include="UpdateTests.cs" />
+    <Compile Include="VerifyTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Lasse V. Karlsen.snk">
+      <Link>Lasse V. Karlsen.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mercurial.Net.Tests.Hook\Mercurial.Net.Tests.Hook.csproj">
+      <Project>{486D3FAB-5FAC-4230-B0B4-3E355FE1033B}</Project>
+      <Name>Mercurial.Net.Tests.Hook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mercurial.Net\Mercurial.Net.csproj">
+      <Project>{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}</Project>
+      <Name>Mercurial.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

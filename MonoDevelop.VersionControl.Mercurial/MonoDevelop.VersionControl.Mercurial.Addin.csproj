@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MonoDevelop.VersionControl.Mercurial</RootNamespace>
+    <AssemblyName>MonoDevelop.VersionControl.Mercurial</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>build\AddIns\VersionControl</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>build\AddIns\VersionControl\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoDevelop.Core, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.VersionControl, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
+    </Reference>
+    <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\Commands.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialRepository.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialVersionControl.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialService.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\PushDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.PushDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialConfigurationDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.MercurialConfigurationDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MergeDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.MergeDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\Shelf.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\ShelfManagerDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.ShelfManagerDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\ConflictResolutionDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.ConflictResolutionDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialOptionsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.MercurialOptionsPanelWidget.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\ShelfCollection.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\EditBranchDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.EditBranchDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialNodeBuilderExtension.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialCommitDialogExtension.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialCommitDialogExtensionWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.MercurialCommitDialogExtensionWidget.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\UserInfoConflictDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.VersionControl.Mercurial.UserInfoConflictDialog.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialClient.cs" />
+    <Compile Include="MonoDevelop.VersionControl.Mercurial\MercurialOptionsPanel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.VersionControl.Mercurial\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\arrow_branch.png">
+      <LogicalName>arrow_branch.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\server.png">
+      <LogicalName>server.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tag_blue.png">
+      <LogicalName>tag_blue.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.VersionControl.Mercurial.addin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile.am" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mercurial.Net\Mercurial.Net\Mercurial.Net.csproj">
+      <Project>{536B722B-DE28-48FC-ABAF-12B4B9FFB44A}</Project>
+      <Name>Mercurial.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
