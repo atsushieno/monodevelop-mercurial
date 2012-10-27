@@ -251,8 +251,11 @@ namespace Mercurial
         {
             if (_Process != null)
             {
-                _Process.StandardInput.Write("dummycommandforceservertoquit\n");
-                _Process.StandardInput.Close();
+                if (!_Process.HasExited)
+                {
+                    _Process.StandardInput.Write("dummycommandforceservertoquit\n");
+                    _Process.StandardInput.Close();
+                }
 
                 _Process.WaitForExit();
                 _Process = null;
