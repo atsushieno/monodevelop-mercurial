@@ -38,9 +38,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.mergeWidget = new global::MonoDevelop.VersionControl.Views.MergeWidget ();
-			this.mergeWidget.Events = ((global::Gdk.EventMask)(256));
-			this.mergeWidget.Name = "mergeWidget";
+			this.mergeWidget = null;
 			this.vbox2.Add (this.mergeWidget);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.mergeWidget]));
 			w3.Position = 1;

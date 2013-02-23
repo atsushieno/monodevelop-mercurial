@@ -5,10 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../../../../build/bin/Mono.TextEditor.dll" />
-    <widget-library name="../../../../../build/bin/MonoDevelop.Ide.dll" />
-    <widget-library name="../../../../../build/AddIns/VersionControl/MonoDevelop.VersionControl.dll" />
-    <widget-library name="../../../../../build/AddIns/VersionControl/MonoDevelop.VersionControl.Mercurial.dll" internal="true" />
+    <widget-library name="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral" />
+    <widget-library name="MonoDevelop.VersionControl, Version=2.6.0.0, Culture=neutral" />
+    <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
+    <widget-library name="../build/AddIns/VersionControl/MonoDevelop.VersionControl.Mercurial.dll" internal="true" />
   </import>
   <widget class="Gtk.Dialog" id="MonoDevelop.VersionControl.Mercurial.PushDialog" design-size="730 540">
     <property name="MemberName" />

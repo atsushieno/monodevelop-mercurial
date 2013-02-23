@@ -136,7 +136,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 
 		// mercurial-FIXME: GetStashes() not supported
 
-		public override Revision[] GetHistory (FilePath localFile, Revision since)
+		protected override Revision[] OnGetHistory (FilePath localFile, Revision since)
 		{
 			List<Revision> revs = new List<Revision> ();
 			var commits = repo.Log (new global::Mercurial.LogCommand ().WithIncludePattern (ToMercurialPath (localFile)));
@@ -295,8 +295,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 					CollectFiles (files, sub, true);
 			}
 		}
-		
-		public override Repository Publish (string serverPath, FilePath localPath, FilePath[] files, string message, IProgressMonitor monitor)
+
+		protected override Repository OnPublish (string serverPath, FilePath localPath, FilePath[] files, string message, IProgressMonitor monitor)
 		{
 			throw new NotImplementedException ();
 			/*
@@ -340,7 +340,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		}
 
 		// no way to support localPaths/recurse; ignore.
-		public override void Update (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
+		protected override void OnUpdate (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
 			repo.Update (new global::Mercurial.UpdateCommand ());
 			/*
@@ -561,8 +561,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 			});
 			return res;
 		}
-		
-		public override void Commit (ChangeSet changeSet, IProgressMonitor monitor)
+
+		protected override void OnCommit (ChangeSet changeSet, IProgressMonitor monitor)
 		{
 			string message = changeSet.GlobalComment;
 			if (string.IsNullOrEmpty (message))
@@ -617,7 +617,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		}
 
 		// Mercurial-FIXME: use IProgressMonitor.
-		public override void Checkout (FilePath targetLocalPath, Revision rev, bool recurse, IProgressMonitor monitor)
+		protected override void OnCheckout (FilePath targetLocalPath, Revision rev, bool recurse, IProgressMonitor monitor)
 		{
 			var uri = new Uri (Url);
 			var name = Path.GetFileName (uri.LocalPath);
@@ -632,8 +632,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 			this.path = repo.Path;
 			repo.Clone (Url, cmd);
 		}
-		
-		public override void Revert (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
+
+		protected override void OnRevert (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
 			// Mercurial-FIXME: use IProgressMonitor
 			foreach (var path in localPaths)
@@ -743,26 +743,25 @@ namespace MonoDevelop.VersionControl.Mercurial
 		}
 		
 		// NIE in git too...?
-		public override void RevertRevision (FilePath localPath, Revision revision, IProgressMonitor monitor)
+		protected override void OnRevertRevision (FilePath localPath, Revision revision, IProgressMonitor monitor)
 		{
 			throw new System.NotImplementedException ();
-		}
-		
+		}		
 		
 		// NIE in git too...?
-		public override void RevertToRevision (FilePath localPath, Revision revision, IProgressMonitor monitor)
+		protected override void OnRevertToRevision (FilePath localPath, Revision revision, IProgressMonitor monitor)
 		{
 			throw new System.NotImplementedException ();
 		}
 		
-		
-		public override void Add (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
+
+		protected override void OnAdd (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
 			// mercurial-FIXME: use monitor.
 			repo.Add (new global::Mercurial.AddCommand ().WithPaths (localPaths.Select (lp => ToMercurialPath (lp)).ToArray ()).WithRecurseSubRepositories (recurse));
 		}
-		
-		public override void DeleteFiles (FilePath[] localPaths, bool force, IProgressMonitor monitor)
+
+		protected override void OnDeleteFiles (FilePath[] localPaths, bool force, IProgressMonitor monitor)
 		{
 			// mercurial-FIXME: use monitor.
 			foreach (var lp in localPaths) {
@@ -772,8 +771,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 					File.Delete (lp);
 			}
 		}
-		
-		public override void DeleteDirectories (FilePath[] localPaths, bool force, IProgressMonitor monitor)
+
+		protected override void OnDeleteDirectories (FilePath[] localPaths, bool force, IProgressMonitor monitor)
 		{
 			// mercurial-FIXME: use monitor.
 			foreach (var lp in localPaths) {
@@ -783,8 +782,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 					Directory.Delete (lp);
 			}
 		}
-		
-		public override string GetTextAtRevision (FilePath repositoryPath, Revision revision)
+
+		protected override string OnGetTextAtRevision (FilePath repositoryPath, Revision revision)
 		{
 			string path = ToMercurialPath (repositoryPath);
 			var rev = ((MercurialRevision) revision).ShortName;
@@ -1270,10 +1269,10 @@ namespace MonoDevelop.VersionControl.Mercurial
 			}
 			return diffs.ToArray ();
 		}
-		
-		public override void MoveFile (FilePath localSrcPath, FilePath localDestPath, bool force, IProgressMonitor monitor)
+
+		protected override void OnMoveFile (FilePath localSrcPath, FilePath localDestPath, bool force, IProgressMonitor monitor)
 		{
-			VersionInfo vi = GetVersionInfo (localSrcPath, false);
+			VersionInfo vi = GetVersionInfo (localSrcPath, VersionInfoQueryFlags.None);
 			if (vi == null || !vi.IsVersioned) {
 				base.MoveFile (localSrcPath, localDestPath, force, monitor);
 				return;
@@ -1284,8 +1283,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 			if ((vi.Status & VersionStatus.ScheduledAdd) != 0)
 				Revert (localSrcPath, false, monitor);
 		}
-		
-		public override void MoveDirectory (FilePath localSrcPath, FilePath localDestPath, bool force, IProgressMonitor monitor)
+
+		protected override void OnMoveDirectory (FilePath localSrcPath, FilePath localDestPath, bool force, IProgressMonitor monitor)
 		{
 			VersionInfo[] versionedFiles = GetDirectoryVersionInfo (localSrcPath, false, true);
 			base.MoveDirectory (localSrcPath, localDestPath, force, monitor);

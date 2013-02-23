@@ -40,13 +40,13 @@ namespace MonoDevelop.VersionControl.Mercurial
 		protected override void Initialize ()
 		{
 			base.Initialize ();
-			IdeApp.CommandService.ApplicationFocusIn += HandleApplicationFocusIn;
+			IdeApp.FocusIn += HandleApplicationFocusIn;
 			MercurialRepository.BranchSelectionChanged += HandleBranchSelectionChanged;
 		}
 		
 		public override void Dispose ()
 		{
-			IdeApp.CommandService.ApplicationFocusIn -= HandleApplicationFocusIn;
+			IdeApp.FocusIn -= HandleApplicationFocusIn;
 			MercurialRepository.BranchSelectionChanged -= HandleBranchSelectionChanged;
 			base.Dispose ();
 		}
