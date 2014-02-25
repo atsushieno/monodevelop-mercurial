@@ -45,9 +45,12 @@ namespace MonoDevelop.VersionControl.Mercurial
 {
 	public class MercurialRepository : UrlBasedRepository
 	{
-		global::Mercurial.Repository  repo;
 		FilePath path;
 		static readonly byte[] EmptyContent = new byte[0];
+
+		internal global::Mercurial.Repository RootRepository {
+			get; set;
+		}
 		
 		public static event EventHandler BranchSelectionChanged;
 		
@@ -60,7 +63,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		{
 			this.path = path;
 			Url = url;
-			repo = new global::Mercurial.Repository (path, new global::Mercurial.PersistentClientFactory ());
+			RootRepository = new global::Mercurial.Repository (path, new global::Mercurial.PersistentClientFactory ());
 		}
 		
 		public override void Dispose ()
@@ -111,8 +114,8 @@ namespace MonoDevelop.VersionControl.Mercurial
 			base.CopyConfigurationFrom (other);
 			MercurialRepository r = (MercurialRepository)other;
 			path = r.path;
-			if (r.repo != null)
-				repo = new global::Mercurial.Repository (path);
+			if (r.RootRepository != null)
+				RootRepository = new global::Mercurial.Repository (path);
 		}
 		
 		public override string LocationDescription {
@@ -125,13 +128,13 @@ namespace MonoDevelop.VersionControl.Mercurial
 		
 		public override string GetBaseText (FilePath localFile)
 		{
-			Changeset c = repo.Tip ();
+			Changeset c = RootRepository.Tip ();
 			if (c == null)
 				return string.Empty;
-			var stat = repo.Status (new StatusCommand ().WithAdditionalArgument (localFile)).FirstOrDefault ();
+			var stat = RootRepository.Status (new StatusCommand ().WithAdditionalArgument (localFile)).FirstOrDefault ();
 			if (stat != null && stat.State == FileState.Added)
 				return string.Empty;
-			return repo.Cat (ToMercurialPath (localFile), new CatCommand ());
+			return RootRepository.Cat (ToMercurialPath (localFile), new CatCommand ());
 		}
 
 		// mercurial-FIXME: GetStashes() not supported
@@ -139,7 +142,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		protected override Revision[] OnGetHistory (FilePath localFile, Revision since)
 		{
 			List<Revision> revs = new List<Revision> ();
-			var commits = repo.Log (new global::Mercurial.LogCommand ().WithIncludePattern (ToMercurialPath (localFile)));
+			var commits = RootRepository.Log (new global::Mercurial.LogCommand ().WithIncludePattern (ToMercurialPath (localFile)));
 			foreach (var commit in commits) {
 				MercurialRevision rev = new MercurialRevision (this, commit.Hash, commit.Timestamp, commit.AuthorName, commit.CommitMessage) {
 					Email = commit.AuthorEmailAddress,
@@ -169,12 +172,6 @@ namespace MonoDevelop.VersionControl.Mercurial
 					paths.Add (new RevisionPath (FromMercurialPath (entry.Path), RevisionAction.Modify, null));
 			}
 			return paths.ToArray ();
-		}
-		
-		
-		protected override IEnumerable<VersionInfo> OnGetVersionInfo (IEnumerable<FilePath> paths, bool getRemoteStatus)
-		{
-			return GetDirectoryVersionInfo (FilePath.Null, paths, getRemoteStatus, false);
 		}
 		
 		protected override VersionInfo[] OnGetDirectoryVersionInfo (FilePath localDirectory, bool getRemoteStatus, bool recursive)
@@ -223,7 +220,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 			}
 			
 			MercurialRevision rev;
-			var headCommit = repo.Tip ();
+			var headCommit = RootRepository.Tip ();
 			if (headCommit != null)
 				rev = new MercurialRevision (this, headCommit.Hash);
 			else
@@ -242,7 +239,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 
 			var statcmd = new StatusCommand ();
 			foreach (var p in paths) statcmd.AddArgument (p);
-			var status = repo.Status (statcmd);
+			var status = RootRepository.Status (statcmd);
 			HashSet<string> added = new HashSet<string> ();
 			Action<IEnumerable<FileStatus>, VersionStatus> AddFiles = delegate(IEnumerable<FileStatus> files, VersionStatus fstatus) {
 				foreach (FileStatus file in files) {
@@ -342,7 +339,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		// no way to support localPaths/recurse; ignore.
 		protected override void OnUpdate (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
-			repo.Update (new global::Mercurial.UpdateCommand ());
+			RootRepository.Update (new global::Mercurial.UpdateCommand ());
 			/*
 			IEnumerable<DiffEntry> statusList = null;
 			
@@ -576,7 +573,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 			}
 			foreach (var file in changeSet.Items)
 				cmd.WithAdditionalArgument (file.LocalPath);
-			repo.Commit (cmd);
+			RootRepository.Commit (cmd);
 		}
 		
 		IEnumerable<string> GetDirectoryFiles (DirectoryInfo dir)
@@ -628,16 +625,16 @@ namespace MonoDevelop.VersionControl.Mercurial
 			var cmd = new CloneCommand ();
 			if (rev != null)
 				cmd.WithRevision (new RevSpec (((MercurialRevision) rev).ShortName));
-			repo = new global::Mercurial.Repository (path);
-			this.path = repo.Path;
-			repo.Clone (Url, cmd);
+			RootRepository = new global::Mercurial.Repository (path);
+			this.path = RootRepository.Path;
+			RootRepository.Clone (Url, cmd);
 		}
 
 		protected override void OnRevert (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
 			// Mercurial-FIXME: use IProgressMonitor
 			foreach (var path in localPaths)
-				repo.Revert (path);
+				RootRepository.Revert (path);
 			/*
 			var c = GetHeadCommit ();
 			RevTree tree = c != null ? c.Tree : null;
@@ -758,14 +755,14 @@ namespace MonoDevelop.VersionControl.Mercurial
 		protected override void OnAdd (FilePath[] localPaths, bool recurse, IProgressMonitor monitor)
 		{
 			// mercurial-FIXME: use monitor.
-			repo.Add (new global::Mercurial.AddCommand ().WithPaths (localPaths.Select (lp => ToMercurialPath (lp)).ToArray ()).WithRecurseSubRepositories (recurse));
+			RootRepository.Add (new global::Mercurial.AddCommand ().WithPaths (localPaths.Select (lp => ToMercurialPath (lp)).ToArray ()).WithRecurseSubRepositories (recurse));
 		}
 
 		protected override void OnDeleteFiles (FilePath[] localPaths, bool force, IProgressMonitor monitor)
 		{
 			// mercurial-FIXME: use monitor.
 			foreach (var lp in localPaths) {
-				repo.Remove (ToMercurialPath (lp), new global::Mercurial.RemoveCommand ().WithForceRemoval (force));
+				RootRepository.Remove (ToMercurialPath (lp), new global::Mercurial.RemoveCommand ().WithForceRemoval (force));
 				// Untracked files are not deleted by the rm command, so delete them now
 				if (File.Exists (lp))
 					File.Delete (lp);
@@ -776,7 +773,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		{
 			// mercurial-FIXME: use monitor.
 			foreach (var lp in localPaths) {
-				repo.Remove (ToMercurialPath (lp), new global::Mercurial.RemoveCommand ().WithForceRemoval (force));
+				RootRepository.Remove (ToMercurialPath (lp), new global::Mercurial.RemoveCommand ().WithForceRemoval (force));
 				// Untracked files are not deleted by the rm command, so delete them now
 				if (Directory.Exists (lp))
 					Directory.Delete (lp);
@@ -787,14 +784,14 @@ namespace MonoDevelop.VersionControl.Mercurial
 		{
 			string path = ToMercurialPath (repositoryPath);
 			var rev = ((MercurialRevision) revision).ShortName;
-			var ret = repo.Cat (new CatCommand ().WithFile (path).WithRevision (rev)) ?? string.Empty;
+			var ret = RootRepository.Cat (new CatCommand ().WithFile (path).WithRevision (rev)) ?? string.Empty;
 			return ret;
 		}
 		
 		public override DiffInfo GenerateDiff (FilePath baseLocalPath, VersionInfo vi)
 		{
 			var rev = new RevSpec (((MercurialRevision) vi.Revision).ShortName);
-			string diff = repo.Diff (new global::Mercurial.DiffCommand ().WithIncludePattern (vi.LocalPath).WithRevisions (rev));
+			string diff = RootRepository.Diff (new global::Mercurial.DiffCommand ().WithIncludePattern (vi.LocalPath).WithRevisions (rev));
 			return new DiffInfo (baseLocalPath, vi.LocalPath, diff);
 			/*
 			try {
@@ -966,7 +963,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		public void CreateBranch (string name, string trackSource)
 		{
 			// In Mercurial there is no way to specify trackSource (disabled)
-			repo.Branch (name);
+			RootRepository.Branch (name);
 		}
 		
 		public void SetBranchTrackSource (string name, string trackSource)
@@ -980,12 +977,12 @@ namespace MonoDevelop.VersionControl.Mercurial
 			// http://mercurial.selenic.com/wiki/PruningDeadBranches
 
 			// fo safety, we don't try to remove branch which involves cleanup.
-			if (repo.Status ().Any (st => st.State != FileState.Clean))
+			if (RootRepository.Status ().Any (st => st.State != FileState.Clean))
 				throw new InvalidOperationException ("We cannot remove branch when there is uncommited changes.");
-			var currentBranch = repo.Branch ();
-			repo.Update (new global::Mercurial.UpdateCommand ().WithClean ().WithAdditionalArgument (name));
-			repo.Commit ("closing branch " + name, new global::Mercurial.CommitCommand ().WithCloseBranch ());
-			repo.Update (new global::Mercurial.UpdateCommand ().WithClean ().WithAdditionalArgument (currentBranch));
+			var currentBranch = RootRepository.Branch ();
+			RootRepository.Update (new global::Mercurial.UpdateCommand ().WithClean ().WithAdditionalArgument (name));
+			RootRepository.Commit ("closing branch " + name, new global::Mercurial.CommitCommand ().WithCloseBranch ());
+			RootRepository.Update (new global::Mercurial.UpdateCommand ().WithClean ().WithAdditionalArgument (currentBranch));
 			//var git = new NGit.Api.Git (repo);
 			//git.BranchDelete ().SetBranchNames (name).SetForce (true).Call ();
 		}
@@ -999,7 +996,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 
 		public IEnumerable<RemoteRepositoryPath> GetRemotes ()
 		{
-			return repo.Paths ();
+			return RootRepository.Paths ();
 		}
 		
 		public bool IsBranchMerged (string branchName)
@@ -1066,30 +1063,30 @@ namespace MonoDevelop.VersionControl.Mercurial
 		
 		public IEnumerable<Branch> GetBranches ()
 		{
-			foreach (var branch in repo.Branches ())
+			foreach (var branch in RootRepository.Branches ())
 				yield return new Branch () { Name = branch.Name };
 		}
 		
 		public IEnumerable<Tag> GetTags ()
 		{
-			return repo.Tags ();
+			return RootRepository.Tags ();
 		}
 		
 		public IEnumerable<string> GetRemoteBranches (string remoteName)
 		{
 			// in Mercurial remote branches == local branches.
-			return repo.Branches ().Select (b => b.Name);
+			return RootRepository.Branches ().Select (b => b.Name);
 		}
 		
 		public string GetCurrentBranch ()
 		{
-			return repo.Branch ();
+			return RootRepository.Branch ();
 		}
 		
 		public void SwitchToBranch (IProgressMonitor monitor, string branch)
 		{
 			// mercurial-FIXME: use monitor.
-			repo.Branch (branch);
+			RootRepository.Branch (branch);
 
 			// mercurial-FIXME: Notify file changes caused by changing the branch.
 
@@ -1215,14 +1212,14 @@ namespace MonoDevelop.VersionControl.Mercurial
 		public ChangeSet GetPushChangeSet (string remote, string branch)
 		{
 			ChangeSet cset = CreateChangeSet (path);
-			if (repo.Branch () != branch)
+			if (RootRepository.Branch () != branch)
 				return cset; // hg cannot retrieve diff in different branches; return empty.
-			var outs = repo.Outgoing (new OutgoingCommand ().WithBranch (branch).WithDestination (remote));
+			var outs = RootRepository.Outgoing (new OutgoingCommand ().WithBranch (branch).WithDestination (remote));
 			if (!outs.Any ())
 				return cset; // empty
 			var oldest = GetPreviousRevisionFor (new MercurialRevision (this, outs.First ().Hash));
 			var youngest = outs.Last ();
-			var stats = repo.Status (new StatusCommand ().WithRevisions (oldest.Name + ':' + youngest.Hash));
+			var stats = RootRepository.Status (new StatusCommand ().WithRevisions (oldest.Name + ':' + youngest.Hash));
 
 			foreach (var change in stats) {
 				VersionStatus status;
@@ -1252,19 +1249,19 @@ namespace MonoDevelop.VersionControl.Mercurial
 		public DiffInfo[] GetPushDiff (string remote, string branch)
 		{
 			List<DiffInfo> diffs = new List<DiffInfo> ();
-			if (repo.Branch () != branch)
+			if (RootRepository.Branch () != branch)
 				return diffs.ToArray (); // hg cannot retrieve diff in different branches; return empty.
-			var outs = repo.Outgoing (new OutgoingCommand ().WithBranch (branch).WithDestination (remote));
+			var outs = RootRepository.Outgoing (new OutgoingCommand ().WithBranch (branch).WithDestination (remote));
 			if (!outs.Any ())
 				return diffs.ToArray (); // empty
 			var oldest = GetPreviousRevisionFor (new MercurialRevision (this, outs.First ().Hash));
 			var youngest = outs.Last ();
 			string revs = oldest.Name + ':' + youngest.Hash;
-			var stats = repo.Status (new StatusCommand ().WithRevisions (revs));
+			var stats = RootRepository.Status (new StatusCommand ().WithRevisions (revs));
 
 			foreach (var change in stats) {
 				var cmd = new global::Mercurial.DiffCommand ().WithRevisions (revs).WithNames (new string [] {change.Path});
-				var diff = repo.Diff (cmd);
+				var diff = RootRepository.Diff (cmd);
 				diffs.Add (new DiffInfo (path, Path.Combine (path, ToMercurialPath (new FilePath (change.Path))), diff));
 			}
 			return diffs.ToArray ();
@@ -1304,7 +1301,7 @@ namespace MonoDevelop.VersionControl.Mercurial
 		{
 			List<Annotation> list = new List<Annotation> ();
 			var cmd = new AnnotateCommand ().WithPath (ToMercurialPath (repositoryPath)).WithAddUserName (true).WithAddDate (true);
-			var anns = repo.Annotate (cmd);
+			var anns = RootRepository.Annotate (cmd);
 			foreach (var ann in anns.OrderBy (a => a.LineNumber)) {
 				//var rev = repo.Log (new RevSpec (ann.RevisionNumber.ToString ())).First ();
 				//string name = rev.AuthorName + (rev.AuthorEmailAddress != null ? " <" + rev.AuthorEmailAddress + ">" : null);
@@ -1318,9 +1315,59 @@ namespace MonoDevelop.VersionControl.Mercurial
 			var cmd = new global::Mercurial.LogCommand ().WithRevision (revision.Name + ":0");
 			if (revision.FileForChanges != null)
 				cmd.WithIncludePattern (ToMercurialPath (revision.FileForChanges));
-			var prev = repo.Log (cmd).Skip (1).FirstOrDefault ();
+			var prev = RootRepository.Log (cmd).Skip (1).FirstOrDefault ();
 			return prev == null ? null : new MercurialRevision (this, prev.Hash);
 		}
+
+		#region implemented abstract members of Repository
+
+		protected override void OnIgnore (FilePath[] localPath)
+		{
+			//return GetDirectoryVersionInfo (FilePath.Null, paths, getRemoteStatus, false);
+			List<FilePath> ignored = new List<FilePath> ();
+			string gitignore = RootPath + Path.DirectorySeparatorChar + ".gitignore";
+			string txt;
+			if (File.Exists (gitignore)) {
+				using (StreamReader br = new StreamReader (gitignore)) {
+					while ((txt = br.ReadLine ()) != null) {
+						ignored.Add (txt);
+					}
+				}
+			}
+
+			StringBuilder sb = new StringBuilder ();
+			foreach (var path in localPath.Except (ignored))
+				sb.AppendLine (ToMercurialPath (path));
+
+			File.AppendAllText (RootPath + Path.DirectorySeparatorChar + ".gitignore", sb.ToString ());
+		}
+
+		protected override void OnUnignore (FilePath[] localPath)
+		{
+			List<string> ignored = new List<string> ();
+			string gitignore = RootPath + Path.DirectorySeparatorChar + ".hgignore";
+			string txt;
+			if (File.Exists (gitignore)) {
+				using (StreamReader br = new StreamReader (RootPath + Path.DirectorySeparatorChar + ".hgignore")) {
+					while ((txt = br.ReadLine ()) != null) {
+						ignored.Add (txt);
+					}
+				}
+			}
+
+			StringBuilder sb = new StringBuilder ();
+			foreach (var path in ignored.Except (localPath.Select (lp => ToMercurialPath (lp))))
+				sb.AppendLine (path);
+
+			File.WriteAllText (RootPath + Path.DirectorySeparatorChar + ".hgignore", sb.ToString ());
+		}
+
+		protected override IEnumerable<VersionInfo> OnGetVersionInfo (IEnumerable<FilePath> paths, bool getRemoteStatus)
+		{
+			return GetDirectoryVersionInfo (FilePath.Null, paths, getRemoteStatus, false);
+		}
+
+		#endregion
 	}
 	
 	public class MercurialRevision: Revision

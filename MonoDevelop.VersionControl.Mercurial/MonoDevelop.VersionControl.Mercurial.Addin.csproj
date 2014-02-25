@@ -3,29 +3,35 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DD4F4021-E73B-4053-AC15-CE3692CC8DBE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MonoDevelop.VersionControl.Mercurial</RootNamespace>
     <AssemblyName>MonoDevelop.VersionControl.Mercurial</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>build\AddIns\VersionControl</OutputPath>
+    <OutputPath>..\..\monodevelop\main\build\AddIns\VersionControl</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
     <Execution>
       <Execution clr-version="Net_2_0" />
     </Execution>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="Execute" command="../../monodevelop/main/build/bin/MonoDevelop.exe" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>build\AddIns\VersionControl\</OutputPath>
+    <OutputPath>..\..\monodevelop\main\build\AddIns\VersionControl</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Execution>
@@ -38,29 +44,19 @@
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="MonoDevelop.Core, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
     <Reference Include="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
     <Reference Include="MonoDevelop.VersionControl, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop-core-addins</Package>
     </Reference>
     <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
   </ItemGroup>
